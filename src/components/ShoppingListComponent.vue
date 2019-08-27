@@ -5,7 +5,7 @@
     <items-component :itemsc="items"></items-component>
     <div class="footer">
       <hr />
-      <change-title-component v-model="title"></change-title-component>
+      <change-title-component :title="title" @changeTitle="changeTitle"></change-title-component>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     ItemsComponent,
     ChangeTitleComponent
   },
-  props: ['items', 'title'],
+  props: ['items', 'title', 'id'],
   // data() {
   //   return {
   //     items: [{ text: 'Bananas', checked: true },
@@ -34,6 +34,10 @@ export default {
     onAddItem: function(item) {
       console.log(item);
       this.items.push(item);
+    },
+    changeTitle: function(title) {
+      // console.log(title);
+      this.$emit('onChangeTitle', this.id, title);
     }
   }
 }

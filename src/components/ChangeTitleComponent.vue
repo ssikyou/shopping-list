@@ -1,16 +1,17 @@
 <template>
   <div>
     <em>Change the title of your shopping list here</em>
-    <input v-bind:value="value" v-on:input="onInput" />
+    <input v-bind:value="title" v-on:input="onInput" />
   </div>
 </template>
 <script>
 export default {
   /* eslint-disable */
-  props: ['value'],
+  props: ['title'],
   methods: {
     onInput: function(event) {
-      this.$emit('input', event.target.value)
+      // console.log(event.target.value);
+      this.$emit('changeTitle', event.target.value)
     }
   }
 }

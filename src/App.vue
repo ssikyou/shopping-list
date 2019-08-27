@@ -8,13 +8,13 @@
       <change-title-component v-model="title"></change-title-component>
     </div> -->
     <ul class="nav nav-tabs" role="tablist">
-      <li :class= "index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" role="presentation">
+      <li :class="index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" role="presentation">
         <a v-bind:href="'#' + list.id" v-bind:aria-controls="list.id" role="tab" data-toggle="tab">{{ list.title }}</a>
       </li>
     </ul>
     <div class="tab-content">
-      <div :class= "index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" class="tab-pane" role="tabpanel" v-bind:id="list.id">
-        <shopping-list-component :items="list.items" :title="list.title"></shopping-list-component>
+      <div :class="index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" class="tab-pane" role="tabpanel" v-bind:id="list.id">
+        <shopping-list-component :items="list.items" :title="list.title" :id="list.id" @onChangeTitle="onChangeTitle"></shopping-list-component>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@
 // import ItemsComponent from './components/ItemsComponent'
 // import ChangeTitleComponent from './components/ChangeTitleComponent'
 import ShoppingListComponent from './components/ShoppingListComponent'
+import _ from 'underscore'
 
 export default {
   /* eslint-disable */
@@ -59,6 +60,9 @@ export default {
     onAddItem: function(item) {
       console.log(item);
       this.items.push(item);
+    },
+    onChangeTitle: function(id, title) {
+      _.findWhere(this.shoppinglists, { id: id }).title = title
     }
   }
 }
