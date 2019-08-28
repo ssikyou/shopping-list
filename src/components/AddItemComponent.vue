@@ -9,7 +9,7 @@
 <script>
 export default {
   /* eslint-disable */
-
+  props: ['id'],
   data: function() {
     return {
       newItem: ''
@@ -23,6 +23,7 @@ export default {
         console.log(text);
         this.$emit('on-add-item', { text: text, checked: false });
         this.newItem = '';
+        this.$store.dispatch('updateShoppingLists', this.id)
       }
     }
   }

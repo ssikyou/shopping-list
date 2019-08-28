@@ -9,7 +9,15 @@
     </div> -->
     <ul class="nav nav-tabs" role="tablist">
       <li :class="index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" role="presentation">
-        <a v-bind:href="'#' + list.id" v-bind:aria-controls="list.id" role="tab" data-toggle="tab">{{ list.title }}</a>
+        <a v-bind:href="'#' + list.id" v-bind:aria-controls="list.id" role="tab" data-toggle="tab">
+          {{ list.title }}
+          <i class="glyphicon glyphicon-remove" @click="deleteShoppingList(list.id)"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" @click="addShoppingList">
+          <i class="glyphicon glyphicon-plus-sign"></i>
+        </a>
       </li>
     </ul>
     <div class="tab-content">
@@ -59,21 +67,40 @@ export default {
   //   }
   // },
   computed: {
-    shoppinglists () {
+    shoppinglists() {
       return this.$store.getters.getLists
     }
   },
   methods: {
-    onAddItem: function(item) {
-      console.log(item);
-      this.items.push(item);
-    },
+    // onAddItem: function(item) {
+    //   console.log(item);
+    //   this.items.push(item);
+    // },
     // onChangeTitle: function(id, title) {
     //   _.findWhere(this.shoppinglists, { id: id }).title = title
     // }
+    addShoppingList() {
+      let list = {
+        title: 'New Shopping List',
+        items: []
+      }
+      this.$store.dispatch('createShoppingList', list)
+    },
+    deleteShoppingList(id) {
+      this.$store.dispatch('deleteShoppingList', id)
+    }
+  },
+  mounted() {
+    this.$store.dispatch('populateShoppingLists')
   }
 }
 
 </script>
-<style>
+<style scoped>
+i {
+  font-size: x-small;
+  padding-left: 3px;
+  cursor: pointer;
+}
+
 </style>

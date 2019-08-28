@@ -8,8 +8,14 @@
   </li>
 </template>
 <script>
+/* eslint-disable */
 export default {
-  props: ['item']
+  props: ['item', 'id'],
+  watch: {
+    'item.checked': function() {
+      this.$store.dispatch('updateShoppingLists', this.id)
+    }
+  }
 }
 
 </script>

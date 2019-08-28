@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <add-item-component v-on:on-add-item="onAddItem"></add-item-component>
-    <items-component :itemsc="items"></items-component>
+    <add-item-component :id="id" v-on:on-add-item="onAddItem"></add-item-component>
+    <items-component :itemsc="items" :id="id"></items-component>
     <div class="footer">
       <hr />
       <change-title-component :title="title" :id="id"></change-title-component>
