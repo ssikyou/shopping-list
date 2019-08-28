@@ -5,7 +5,7 @@
     <items-component :itemsc="items"></items-component>
     <div class="footer">
       <hr />
-      <change-title-component :title="title" @changeTitle="changeTitle"></change-title-component>
+      <change-title-component :title="title" :id="id"></change-title-component>
     </div>
   </div>
 </template>
@@ -35,10 +35,10 @@ export default {
       console.log(item);
       this.items.push(item);
     },
-    changeTitle: function(title) {
-      // console.log(title);
-      this.$emit('onChangeTitle', this.id, title);
-    }
+    // changeTitle: function(title) {
+    //   // console.log(title);
+    //   this.$emit('onChangeTitle', this.id, title);
+    // }
   }
 }
 

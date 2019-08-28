@@ -14,7 +14,7 @@
     </ul>
     <div class="tab-content">
       <div :class="index===0 ? 'active' : ''" v-for="(list, index) in shoppinglists" :key="list.id" class="tab-pane" role="tabpanel" v-bind:id="list.id">
-        <shopping-list-component :items="list.items" :title="list.title" :id="list.id" @onChangeTitle="onChangeTitle"></shopping-list-component>
+        <shopping-list-component :items="list.items" :title="list.title" :id="list.id"></shopping-list-component>
       </div>
     </div>
   </div>
@@ -25,7 +25,8 @@
 // import ItemsComponent from './components/ItemsComponent'
 // import ChangeTitleComponent from './components/ChangeTitleComponent'
 import ShoppingListComponent from './components/ShoppingListComponent'
-import _ from 'underscore'
+// import _ from 'underscore'
+import store from './vuex/store'
 
 export default {
   /* eslint-disable */
@@ -37,23 +38,29 @@ export default {
     // ChangeTitleComponent
     ShoppingListComponent
   },
-  data() {
-    return {
-      shoppinglists: [{
-          id: 'groceries',
-          title: 'Groceries',
-          items: [{ text: 'Bananas', checked: true },
-            { text: 'Apples', checked: false }
-          ]
-        },
-        {
-          id: 'clothes',
-          title: 'Clothes',
-          items: [{ text: 'black dress', checked: false },
-            { text: 'all stars', checked: false }
-          ]
-        }
-      ]
+  store,
+  // data() {
+  //   return {
+  //     shoppinglists: [{
+  //         id: 'groceries',
+  //         title: 'Groceries',
+  //         items: [{ text: 'Bananas', checked: true },
+  //           { text: 'Apples', checked: false }
+  //         ]
+  //       },
+  //       {
+  //         id: 'clothes',
+  //         title: 'Clothes',
+  //         items: [{ text: 'black dress', checked: false },
+  //           { text: 'all stars', checked: false }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // },
+  computed: {
+    shoppinglists () {
+      return this.$store.getters.getLists
     }
   },
   methods: {
@@ -61,9 +68,9 @@ export default {
       console.log(item);
       this.items.push(item);
     },
-    onChangeTitle: function(id, title) {
-      _.findWhere(this.shoppinglists, { id: id }).title = title
-    }
+    // onChangeTitle: function(id, title) {
+    //   _.findWhere(this.shoppinglists, { id: id }).title = title
+    // }
   }
 }
 
